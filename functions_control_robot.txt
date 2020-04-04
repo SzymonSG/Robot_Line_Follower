@@ -1,0 +1,43 @@
+from controller import Robot
+from controller import Compass
+
+# Zadeklaruj robota
+robot = Robot()
+
+# Długość odcinka toru
+timeStep = int(robot.getBasicTimeStep())
+
+maxMotorVelocity = 9.53
+distanceSensorCalibrationConstant = 360
+
+# Ustaw lewe oraz prawe koło
+leftMotor = robot.getMotor("motor.left")
+rightMotor = robot.getMotor("motor.right")
+
+# Pobierz wartości początkowe
+outerLeftSensor = robot.getDistanceSensor("prox.horizontal.0")
+centralLeftSensor = robot.getDistanceSensor("prox.horizontal.1")
+centralSensor = robot.getDistanceSensor("prox.horizontal.2")
+centralRightSensor = robot.getDistanceSensor("prox.horizontal.3")
+outerRightSensor = robot.getDistanceSensor("prox.horizontal.4")
+
+# Włączenie sensorów dystansu
+outerLeftSensor.enable(timeStep)
+centralLeftSensor.enable(timeStep)
+centralSensor.enable(timeStep)
+centralRightSensor.enable(timeStep)
+outerRightSensor.enable(timeStep)
+
+leftMotor.setPosition(float('inf'))
+rightMotor.setPosition(float('inf'))
+
+#Zwiekszenie mnoznika predkosci z 0.7 => 0.9
+initialVelocity = 0.9 * maxMotorVelocity
+
+# Ustawienie lewego i prawego koła
+leftMotor.setVelocity(initialVelocity)
+rightMotor.setVelocity(initialVelocity)
+
+    
+
+
