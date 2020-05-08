@@ -1,0 +1,503 @@
+#include <stdio.h>
+#include <webots/distance_sensor.h>
+#include <webots/led.h>
+#include <webots/accelerometer.h>
+#include <webots/camera.h>
+#include <webots/light_sensor.h>
+#include <webots/motor.h>
+#include <webots/robot.h>
+
+#define TRUE 1
+#define FALSE 0
+#define NO_SIDE -1
+#define LEFT 0
+#define RIGHT 1
+#define WHITE 0
+#define RED 1
+#define BLACK 1
+#define SIMULATION 0  // for wb_robot_get_mode() function
+#define REALITY 2     // for wb_robot_get_mode() function
+#define TIME_STEP 32  // [ms]
+
+// 8 IR proximity sensors
+#define NB_DIST_SENS 8
+#define PS_RIGHT_00 0
+#define PS_RIGHT_45 1
+#define PS_RIGHT_90 2
+#define PS_RIGHT_REAR 3
+#define PS_LEFT_REAR 4
+#define PS_LEFT_90 5
+#define PS_LEFT_45 6
+#define PS_LEFT_00 7
+const int PS_OFFSET_SIMULATION[NB_DIST_SENS] = {300, 300, 300, 300, 300, 300, 300, 300};
+const int PS_OFFSET_REALITY[NB_DIST_SENS] = {480, 170, 320, 500, 600, 680, 210, 640};
+WbDeviceTag ps[NB_DIST_SENS]; /* proximity sensors */
+int ps_value[NB_DIST_SENS] = {0, 0, 0, 0, 0, 0, 0, 0};
+
+// 3 IR ground color sensors
+#define NB_GROUND_SENS 3
+#define GS_WHITE 900
+#define GS_LEFT 0
+#define GS_CENTER 1
+#define GS_RIGHT 2
+WbDeviceTag gs[NB_GROUND_SENS]; /* ground sensors */
+unsigned short gs_value[NB_GROUND_SENS] = {0, 0, 0};
+
+// Motors
+WbDeviceTag left_motor, right_motor;
+
+// LEDs
+#define NB_LEDS 8
+WbDeviceTag led[NB_LEDS];
+
+//------------------------------------------------------------------------------
+//
+//    BEHAVIORAL MODULES
+//
+//------------------------------------------------------------------------------
+
+////////////////////////////////////////////
+// LFM - Line Following Module
+// prędkość magazynowany lfm_speed[LEFT] and lfm_speed[RIGHT].
+
+int lfm_speed[2];
+
+#define LFM_FORWARD_SPEED 200
+#define LFM_K_GS_SPEED 0.4
+
+void LineFollowingModule(void) {
+  int DeltaS = gs_value[GS_RIGHT] - gs_value[GS_LEFT];
+
+  lfm_speed[LEFT] = LFM_FORWARD_SPEED - LFM_K_GS_SPEED * DeltaS;
+  lfm_speed[RIGHT] = LFM_FORWARD_SPEED + LFM_K_GS_SPEED * DeltaS;
+}
+
+////////////////////////////////////////////
+// OAM - Obstacle Avoidance Module
+//Procedura OAM najpierw wykrywa przeszkody przed robotem, a następnie rejestruje
+// swoją stronę w „oam_side” i unika wykrytej przeszkody
+// odwrócenie zgodnie z bardzo prostymi ważonymi połączeniami między
+// czujniki zbliżeniowe i silniki. „oam_active” staje się aktywny, gdy tylko
+// obiekt zostanie wykryty i „oam_reset” dezaktywuje moduł i zestaw Output speeds are in oam_speed[LEFT] and oam_speed[RIGHT].
+
+int oam_active, oam_reset;
+int oam_speed[2];
+int oam_side = NO_SIDE;
+
+#define OAM_OBST_THRESHOLD 100
+#define OAM_FORWARD_SPEED 150
+#define OAM_K_PS_90 0.2
+#define OAM_K_PS_45 0.9
+#define OAM_K_PS_00 1.2
+#define OAM_K_MAX_DELTAS 600
+
+void ObstacleAvoidanceModule(void) {
+  int max_ds_value, i;
+  int Activation[] = {0, 0};
+
+  // Module RESET
+  if (oam_reset) {
+    oam_active = FALSE;
+    oam_side = NO_SIDE;
+  }
+  oam_reset = 0;
+
+  //Określ obecność i bok przeszkody
+  max_ds_value = 0;
+  for (i = PS_RIGHT_00; i <= PS_RIGHT_45; i++) {
+    if (max_ds_value < ps_value[i])
+      max_ds_value = ps_value[i];
+    Activation[RIGHT] += ps_value[i];
+  }
+  for (i = PS_LEFT_45; i <= PS_LEFT_00; i++) {
+    if (max_ds_value < ps_value[i])
+      max_ds_value = ps_value[i];
+    Activation[LEFT] += ps_value[i];
+  }
+  if (max_ds_value > OAM_OBST_THRESHOLD)
+    oam_active = TRUE;
+
+  if (oam_active && oam_side == NO_SIDE)  // check for side of obstacle only when not already detected
+  {
+    if (Activation[RIGHT] > Activation[LEFT])
+      oam_side = RIGHT;
+    else
+      oam_side = LEFT;
+  }
+
+  // Prędkość na przód
+  oam_speed[LEFT] = OAM_FORWARD_SPEED;
+  oam_speed[RIGHT] = OAM_FORWARD_SPEED;
+
+  // Omiń przeszkodę
+  if (oam_active) {
+    int DeltaS = 0;
+    // Obrót robota zależy od położenia i boku przeszkody
+    if (oam_side == LEFT) {
+      //(((ps_value[PS_LEFT_90]-PS_OFFSET)<0)?0:(ps_value[PS_LEFT_90]-PS_OFFSET)));
+      DeltaS -= (int)(OAM_K_PS_90 * ps_value[PS_LEFT_90]);
+      //(((ps_value[PS_LEFT_45]-PS_OFFSET)<0)?0:(ps_value[PS_LEFT_45]-PS_OFFSET)));
+      DeltaS -= (int)(OAM_K_PS_45 * ps_value[PS_LEFT_45]);
+      //(((ps_value[PS_LEFT_00]-PS_OFFSET)<0)?0:(ps_value[PS_LEFT_00]-PS_OFFSET)));
+      DeltaS -= (int)(OAM_K_PS_00 * ps_value[PS_LEFT_00]);
+    } else {  // oam_side == RIGHT
+      //(((ps_value[PS_RIGHT_90]-PS_OFFSET)<0)?0:(ps_value[PS_RIGHT_90]-PS_OFFSET)));
+      DeltaS += (int)(OAM_K_PS_90 * ps_value[PS_RIGHT_90]);
+      //(((ps_value[PS_RIGHT_45]-PS_OFFSET)<0)?0:(ps_value[PS_RIGHT_45]-PS_OFFSET)));
+      DeltaS += (int)(OAM_K_PS_45 * ps_value[PS_RIGHT_45]);
+      //(((ps_value[PS_RIGHT_00]-PS_OFFSET)<0)?0:(ps_value[PS_RIGHT_00]-PS_OFFSET)));
+      DeltaS += (int)(OAM_K_PS_00 * ps_value[PS_RIGHT_00]);
+    }
+    if (DeltaS > OAM_K_MAX_DELTAS)
+      DeltaS = OAM_K_MAX_DELTAS;
+    if (DeltaS < -OAM_K_MAX_DELTAS)
+      DeltaS = -OAM_K_MAX_DELTAS;
+
+    // Set speeds
+    oam_speed[LEFT] -= DeltaS;
+    oam_speed[RIGHT] += DeltaS;
+  }
+}
+
+////////////////////////////////////////////
+// LLM - Line Leaving Module
+//
+
+// Ponieważ nie ma danych wyjściowych, ta procedura nie jest całkowicie zakończona. To ma
+// został zaprojektowany do monitorowania momentu, w którym robot opuszcza
+// śledzenie i przekazywanie innym modułom niektórych powiązanych zdarzeń. Staje się aktywny
+// za każdym razem, gdy zmienna „boczna” wyświetla zbocze narastające (zmiana z -1 na 0 lub 1).
+
+int llm_active = FALSE, llm_inibit_ofm_speed, llm_past_side = NO_SIDE;
+int lem_reset;
+
+#define LLM_THRESHOLD 800
+
+void LineLeavingModule(int side) {
+  // Uruchomienie modułu na zboczu narastającym „z boku”
+  if (!llm_active && side != NO_SIDE && llm_past_side == NO_SIDE)
+    llm_active = TRUE;
+
+  // Aktualizacja pamięci stanu „bocznego” przy poprzednim wywołaniu
+  llm_past_side = side;
+
+  // Main loop
+  if (llm_active) {  // Po prostu czekaj, aż linia nie zostanie już wykryta
+    if (side == LEFT) {
+      if ((gs_value[GS_CENTER] + gs_value[GS_LEFT]) / 2 > LLM_THRESHOLD) {  // out of line
+        llm_active = FALSE;
+        // *** PUT YOUR CODE HERE ***
+        llm_inibit_ofm_speed = FALSE;
+        lem_reset = TRUE;
+        // *** PUT YOUR CODE HERE ***
+      } else {  // still leaving the line
+        // *** PUT YOUR CODE HERE ***
+        llm_inibit_ofm_speed = TRUE;
+        // *** PUT YOUR CODE HERE ***
+      }
+    } else {                                                                 // side == RIGHT
+      if ((gs_value[GS_CENTER] + gs_value[GS_RIGHT]) / 2 > LLM_THRESHOLD) {  // out of line
+        llm_active = FALSE;
+        // *** PUT YOUR CODE HERE ***
+        llm_inibit_ofm_speed = FALSE;
+        lem_reset = TRUE;
+        // *** PUT YOUR CODE HERE ***
+      } else {  // still leaving the line
+        // *** PUT YOUR CODE HERE ***
+        llm_inibit_ofm_speed = TRUE;
+        // *** PUT YOUR CODE HERE ***
+      }
+    }
+  }
+}
+
+////////////////////////////////////////////
+// OFM - Obstacle Following Module
+//
+// 
+//Ta funkcja po prostu daje robotowi tendencję do skręcania w bok
+// wskazany przez argument „side”. W przypadku użycia w konkurencji z OAM to
+// powoduje powstanie obiektu po zachowaniu. Prędkości wyjściowe wynoszą
+// przechowywane w ofm_speed [LEFT] i ofm_speed [RIGHT].
+
+int ofm_active;
+int ofm_speed[2];
+
+#define OFM_DELTA_SPEED 150
+
+void ObstacleFollowingModule(int side) {
+  if (side != NO_SIDE) {
+    ofm_active = TRUE;
+    if (side == LEFT) {
+      ofm_speed[LEFT] = -OFM_DELTA_SPEED;
+      ofm_speed[RIGHT] = OFM_DELTA_SPEED;
+    } else {
+      ofm_speed[LEFT] = OFM_DELTA_SPEED;
+      ofm_speed[RIGHT] = -OFM_DELTA_SPEED;
+    }
+  } else {  // side = NO_SIDE
+    ofm_active = FALSE;
+    ofm_speed[LEFT] = 0;
+    ofm_speed[RIGHT] = 0;
+  }
+}
+
+////////////////////////////////////////////
+// LEM - Line Entering Module 
+//Dołączenie się do lini
+
+int lem_active;
+int lem_speed[2];
+int lem_state, lem_black_counter, lem_red_counter;
+int cur_op_gs_value, prev_op_gs_value;
+
+#define LEM_FORWARD_SPEED 100
+#define LEM_K_GS_SPEED 0.5
+#define LEM_THRESHOLD 500
+
+#define LEM_STATE_STANDBY 0
+#define LEM_STATE_LOOKING_FOR_LINE 1
+#define LEM_STATE_LINE_DETECTED 2
+#define LEM_STATE_ON_LINE 3
+
+
+void LineEnteringModule(int side) {
+  int Side, OpSide, GS_Side, GS_OpSide;
+
+  // Module reset
+  if (lem_reset)
+    lem_state = LEM_STATE_LOOKING_FOR_LINE;
+  lem_reset = FALSE;
+
+  // Initialization
+  lem_speed[LEFT] = LEM_FORWARD_SPEED;
+  lem_speed[RIGHT] = LEM_FORWARD_SPEED;
+  if (side == LEFT) {  // jesli przeszkoda po lewej -> pójdź na prawo
+    Side = RIGHT;      // kierunek wejścia
+    OpSide = LEFT;
+    GS_Side = GS_RIGHT;
+    GS_OpSide = GS_LEFT;
+  } else {        // jesli przeszkoda po lewej -> pojdz na lewo
+    Side = LEFT;  // kierunek wejścia
+    OpSide = RIGHT;
+    GS_Side = GS_LEFT;
+    GS_OpSide = GS_RIGHT;
+  }
+
+  // Główna pętla szukająca lini
+  switch (lem_state) {
+  //Case - Warunek Podczas czuwania
+    case LEM_STATE_STANDBY:
+    //Ruch kół ma być zablokowany/ w trybie nasłuchu
+      lem_active = FALSE; 
+      break;
+  //Case - Warunek poszukiwania lini 
+    case LEM_STATE_LOOKING_FOR_LINE:
+    //wartość sensora < 500
+      if (gs_value[GS_Side] < LEM_THRESHOLD) {
+        lem_active = TRUE;
+        // Ustawiam prędkość podczas wejścia na linie
+        lem_speed[OpSide] = LEM_FORWARD_SPEED;
+        lem_speed[Side] = LEM_FORWARD_SPEED;  // LEM_K_GS_SPEED * gs_value[GS_Side];
+        lem_state = LEM_STATE_LINE_DETECTED; //Do czuwania dodaj detekcję lini
+        // //wartość sensora < 500
+        if (gs_value[GS_OpSide] < LEM_THRESHOLD) {
+          cur_op_gs_value = BLACK; //przypisz kolor czarny
+          lem_black_counter = 1;
+        } else {
+          cur_op_gs_value = WHITE; //przypisz kolor biały
+          lem_black_counter = 0;
+        }
+       //wartość sensora < 500
+        if (gs_value[GS_OpSide] < LEM_THRESHOLD) {
+          cur_op_gs_value = RED; //przypisz kolor czerwony
+          lem_red_counter = 1;
+        } else {
+          cur_op_gs_value = WHITE; //przypisz kolor biały
+          lem_red_counter = 0;
+        }
+        //wcześniejsza wartość sensora = obecna wartość sensora AKTUALIZACJA
+        prev_op_gs_value = cur_op_gs_value;
+      }
+      break;
+    case LEM_STATE_LINE_DETECTED:
+      // zapisz wartość przeciwnego czujnika naziemnego
+      if (gs_value[GS_OpSide] < LEM_THRESHOLD) {
+        cur_op_gs_value = BLACK; //przypisz kolor czarny
+        lem_black_counter++;
+      } else
+        cur_op_gs_value = WHITE;
+        
+      if (gs_value[GS_OpSide] < LEM_THRESHOLD) {
+        cur_op_gs_value = RED; //przypisz kolor czerwony
+        lem_red_counter++;
+      } else
+        cur_op_gs_value = WHITE;
+      // wykryj krawędź czarna -> biała
+      if (prev_op_gs_value == BLACK && cur_op_gs_value == WHITE) {
+        lem_state = LEM_STATE_ON_LINE; //pozostań na lini
+        lem_speed[OpSide] = 0;
+        lem_speed[Side] = 0;
+      } else {
+        prev_op_gs_value = cur_op_gs_value;
+       // Ustawiam prędkość podczas wejścia na linie 
+        lem_speed[OpSide] = LEM_FORWARD_SPEED + LEM_K_GS_SPEED * (GS_WHITE - gs_value[GS_Side]);
+        lem_speed[Side] = LEM_FORWARD_SPEED - LEM_K_GS_SPEED * (GS_WHITE - gs_value[GS_Side]);
+        }
+         // wykryj krawędź czerwona -> biała
+      if (prev_op_gs_value == RED && cur_op_gs_value == WHITE) {
+        lem_state = LEM_STATE_ON_LINE;//pozostań na lini
+        lem_speed[OpSide] = 1; //zwiększenie prędkości
+        lem_speed[Side] = 1; //zwiększenie prędkości
+      } else {
+        prev_op_gs_value = cur_op_gs_value;
+        // Ustawiam prędkość podczas wejścia na linie 
+        lem_speed[OpSide] = LEM_FORWARD_SPEED + LEM_K_GS_SPEED * (GS_WHITE - gs_value[GS_Side]);
+        lem_speed[Side] = LEM_FORWARD_SPEED - LEM_K_GS_SPEED * (GS_WHITE - gs_value[GS_Side]);
+      }
+      break;
+    case LEM_STATE_ON_LINE: //przypadek czuwania
+      oam_reset = TRUE; //zrestartuj oam
+      lem_active = FALSE; //zablokuj koła
+      lem_state = LEM_STATE_STANDBY; //ustaw czuwanie na robocie
+      break;
+  }
+}
+//------------------------------------------------------------------------------
+//
+//    CONTROLLER
+//
+//------------------------------------------------------------------------------
+
+////////////////////////////////////////////
+// Main
+int main() {
+  int ps_offset[NB_DIST_SENS] = {0, 0, 0, 0, 0, 0, 0, 0}, i, speed[2], Mode = 1;
+  int oam_ofm_speed[2];
+  int time_step;
+  int camera_time_step;
+  /* intialize Webots */
+  wb_robot_init();
+
+  if (strcmp(wb_robot_get_model(), "GCtronic e-puck2") == 0) {
+    printf("e-puck2 robot\n");
+    time_step = 64;
+    camera_time_step = 64;
+  } else {  // original e-puck
+    printf("e-puck robot\n");
+    time_step = 256;
+    camera_time_step = 1024;
+  }
+  /* initialization */
+  char name[20];
+  for (i = 0; i < NB_LEDS; i++) {
+    sprintf(name, "led%d", i);
+    led[i] = wb_robot_get_device(name); /* get a handler to the sensor */
+  }
+  for (i = 0; i < NB_DIST_SENS; i++) {
+    sprintf(name, "ps%d", i);
+    ps[i] = wb_robot_get_device(name); /* proximity sensors */
+    wb_distance_sensor_enable(ps[i], TIME_STEP);
+  }
+  for (i = 0; i < NB_GROUND_SENS; i++) {
+    sprintf(name, "gs%d", i);
+    gs[i] = wb_robot_get_device(name); /* ground sensors */
+    wb_distance_sensor_enable(gs[i], TIME_STEP);
+  }
+  
+  
+  WbDeviceTag camera = wb_robot_get_device("camera");
+  wb_camera_enable(camera, camera_time_step);
+  WbDeviceTag accelerometer = wb_robot_get_device("accelerometer");
+  wb_accelerometer_enable(accelerometer, time_step);
+  // motors
+  left_motor = wb_robot_get_device("left wheel motor");
+  right_motor = wb_robot_get_device("right wheel motor");
+  wb_motor_set_position(left_motor, INFINITY);
+  wb_motor_set_position(right_motor, INFINITY);
+  wb_motor_set_velocity(left_motor, 0.0);
+  wb_motor_set_velocity(right_motor, 0.0);
+
+  for (;;) {  // Main loop
+    wb_robot_step(TIME_STEP);
+
+    if (Mode != wb_robot_get_mode()) {
+      oam_reset = TRUE;
+      llm_active = FALSE;
+      llm_past_side = NO_SIDE;
+      ofm_active = FALSE;
+      lem_active = FALSE;
+      lem_state = LEM_STATE_STANDBY;
+      Mode = wb_robot_get_mode();
+      if (Mode == SIMULATION) {
+        for (i = 0; i < NB_DIST_SENS; i++)
+          ps_offset[i] = PS_OFFSET_SIMULATION[i];
+        wb_motor_set_velocity(left_motor, 0);
+        wb_motor_set_velocity(right_motor, 0);
+        wb_robot_step(TIME_STEP);  
+        printf("\n\n\nSwitching to SIMULATION and reseting all BB variables.\n\n");
+      } else if (Mode == REALITY) {
+        for (i = 0; i < NB_DIST_SENS; i++)
+          ps_offset[i] = PS_OFFSET_REALITY[i];
+        wb_motor_set_velocity(left_motor, 0);
+        wb_motor_set_velocity(right_motor, 0);
+        wb_robot_step(TIME_STEP);  
+        printf("\n\n\nSwitching to REALITY and reseting all BB variables.\n\n");
+      }
+    }
+
+    // zczytaj wartosc sensorow
+    for (i = 0; i < NB_DIST_SENS; i++)
+      ps_value[i] = (((int)wb_distance_sensor_get_value(ps[i]) - ps_offset[i]) < 0) ?
+                      0 :
+                      ((int)wb_distance_sensor_get_value(ps[i]) - ps_offset[i]);
+    for (i = 0; i < NB_GROUND_SENS; i++)
+      gs_value[i] = wb_distance_sensor_get_value(gs[i]);
+
+    // ustaw predkosc
+    speed[LEFT] = 0;
+    speed[RIGHT] = 0;
+
+    // LFM 
+    LineFollowingModule();
+
+    speed[LEFT] = lfm_speed[LEFT];
+    speed[RIGHT] = lfm_speed[RIGHT];
+
+    // OAM 
+    ObstacleAvoidanceModule();
+
+    // LLM 
+    LineLeavingModule(oam_side);
+
+    // OFM 
+    ObstacleFollowingModule(oam_side);
+
+
+    if (llm_inibit_ofm_speed) {
+      ofm_speed[LEFT] = 0;
+      ofm_speed[RIGHT] = 0;
+    }
+
+
+    oam_ofm_speed[LEFT] = oam_speed[LEFT] + ofm_speed[LEFT];
+    oam_ofm_speed[RIGHT] = oam_speed[RIGHT] + ofm_speed[RIGHT];
+
+
+    if (oam_active || ofm_active) {
+      speed[LEFT] = oam_ofm_speed[LEFT];
+      speed[RIGHT] = oam_ofm_speed[RIGHT];
+    }
+
+
+    if (lem_active) {
+      speed[LEFT] = lem_speed[LEFT];
+      speed[RIGHT] = lem_speed[RIGHT];
+    }
+
+    // Set wheel speeds
+    wb_motor_set_velocity(left_motor, 0.00628 * speed[LEFT]);
+    wb_motor_set_velocity(right_motor, 0.00628 * speed[RIGHT]);
+  }
+  return 0;
+}
