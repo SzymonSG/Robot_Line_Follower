@@ -56,20 +56,20 @@ Instalację należy wykonać przechodząć do przeglądarki internetowej (prefer
 Link: https://cyberbotics.com/ <br><br>
 Będąc na stronie producenta , wybieramy przycisk kierujący do listy rozwijanej:
 
-![alt text](download.png "Title") 
+![alt text](images/download.png "Title") 
 
 Z listy rozwijanej wybierany system z którego korzysta nasz komputer.
 Po wyborze systemu , zostaję uruchomiony proces pobierania aplikacji na komputer.
 
 
-![alt text](pasek.png "Title")
+![alt text](images/pasek.png "Title")
 
 <font size="3"><b>c. Ścieżka instalacji </font></b> <br>
 
 <font size="5 "> 2. Uruchomienie programu Weebots</font><br><br>
 W momencie kiedy nasz program będzie już zainstalowany na komputerze. Będziemy mieli możliwość uruchomienia go z listy dostępnych aplikacji w systemie
 
-![alt text](menu.png "Title")
+![alt text](images/menu.png "Title")
 
 <p style="text-indent: 30px;"><font size="3"><b>wyrównay porgubiony i powiekszony paragraf</font></b></p> 
 
@@ -85,7 +85,7 @@ FILE -> New project<br>
 Po wykonanu tej procedury otrzymamy widok:
 
 
-![alt text](widok.png "Title")
+![alt text](images/widok.png "Title")
 
 <p style="text-indent: 30px;"><font size="3"><b>ii.	Zapis projektu</font></b></p>
 Zapis projektu wykonujemy przez procedurę zapisu:
@@ -102,31 +102,31 @@ W tym momencie pojawia nam się okienko z możliwością wyboru interesującej n
 Wybieramy:<br>
 Robots-> gctronic -> e-puck -> e-puck.wbt
 
-![alt text](opensample.png "Title")<br>
+![alt text](images/opensample.png "Title")<br>
 W momencie uruchomienia szablonu , pojawi się poniższy schemat:
 
-![alt text](szach.png "Title")<br><br>
+![alt text](images/szach.png "Title")<br><br>
 W celu przygotowania planszy pod interesujące nas tory , będziemy musieli przejść etap oczyszczenia planszy z zbędnych materiałów które zostały zaimplementowane w schmecie tj. Box
 
 
-![alt text](zoom.png "Title")<br><br>
+![alt text](images/zoom.png "Title")<br><br>
 
 Dokonamy tego klikając PPM (Prawym przyciskiem myszy) na dany element , a następnie wybierając opcję „Delete”.
 Powyższą procedurę wykonujemy na każdym obiekcie który widnieję na planszy.
 Po wykonaniu wszystkich kroków, nasza gotowa plansza powinna wyglądać w poniższy sposób
 
 
-![alt text](plansza.png "Title")<br>
+![alt text](images/plansza.png "Title")<br>
 Na końcowym etapie RectangleArea , powinna posiadać wszystkie niżej wymienione zdefiniowane metody:
 
-![alt text](set.png "Title")<br>
+![alt text](images/set.png "Title")<br>
 
 
 <font size="3"><b>c. Inicjacja torów </font></b> <br>
 <p style="text-indent: 30px;"><font size="3"><b>i.	Utworzenie toru w programie Adobe Photoshop</font></b></p>
 Tor jazdy tworzymy w rozdzielczości nie mniejszej oraz nie większej niż:
 
-![alt text](wym.png "Title")
+![alt text](images/wym.png "Title")
 
 
 Jest to kluczowy element w momencie tworzenia toru , gdyż bazując na naszej powierzchni floor w RectangleArea musimy dostosować rozdzielczość wykonanego toru do powierzchni która została udostępniona w tym wypadku to rozmiar: 2048 x 1024 px.<br>
@@ -157,7 +157,7 @@ Warto również wykonać kopię toru, gdyż funkcja nie zapamięta go w systemie
 
 <p style="text-indent: 30px;"><font size="3"><b>Załącznik 1:</font></b></p>
 
-![alt text](zal.png "Title")
+![alt text](images/zal.png "Title")
 
 <font size="3"><b>d. Inicjacja Robota </font></b> <br>
 <p style="text-indent: 30px;"><font size="3"><b>i.	Wybór robota e-puck</font></b></p>
@@ -168,7 +168,7 @@ E-Puck – to miniaturowy robot mobilny opracowany pierwotnie w EPFL do celów d
 W celu ręcznej implementacji robota, jesteśmy w stanie tego dokonać dodając go jako dodatkowa zawartość do naszej mapy.
 
 
-![alt text](addnode.png "Title")<br>
+![alt text](images/addnode.png "Title")<br>
 <font size="5">4.	Zaprogramowanie robota</font><br><br>
 <font size="3"><b>a.	Wybór czujników </font></b> <br>
 Czujniki pełnią istotną rolę w funkcjonowaniu robotów. To dzięki nim jesteśmy w stanie skonfigurować robota pod takim zachowaniem jakie nas interesuję. Jesteśmy ograniczeni tylko do tych które są dostępne, dlatego też bardzo ważny jest wcześniejszy prawidłowy wybór robota, aby zapewnił nam odpowiednie zapotrzebowanie do naszych zadań.
@@ -211,20 +211,20 @@ Wizards -> New Robot Controller…
 Po wyborze powyższej opcji , otrzymamy widok kreatora która przeprowadzi nas przez proces utworzenia nowego kontrolera.
 
 
-![alt text](boom.png "Title")<br><br>
+![alt text](images/boom.png "Title")<br><br>
 Klikamy przycisk „Next” , a następnie wybieramy język programowania w którym będziemy tworzyć kod dla naszego robota (Uwaga! W przypadku gotowych robotów , warto użyć języka programowania który obsługuję robot. W innym wypadku program może się nie skompilować poprawnie). <br>
 Klikamy przycisk „Next” , a następnie wybieramy język programowania w którym będziemy tworzyć kod dla naszego robota (Uwaga! W przypadku gotowych robotów , warto użyć języka programowania który obsługuję robot. W innym wypadku program może się nie skompilować poprawnie).<br>
 
-![alt text](pop.png "Title")
+![alt text](images/pop.png "Title")
 
 Klikając przycisk „Next” przechodzimy do etapu wyboru środowiska IDE w którym będziemy projektować kod, domyślnie wybrane IDE to „Webots”<br>
 
 
-![alt text](new.png "Title")<br>
+![alt text](images/new.png "Title")<br>
 
 Po nadaniu nazwy , etap tworzenia kontrolera zostaje zakończony. Mamy możliwość zakończenia kreatora z opcją automatycznego otwarcia naszego nowo przygotowanego kontrolera w edytorze tekstu.
 
-![alt text](controller.png "Title")<br><br>
+![alt text](images/controller.png "Title")<br><br>
 
 <p style="text-allign: center;"><font size="4"><b>Standardowy kod jaki zostaje utworzony, to prosty wycinek który implementuję robota oraz jego podstawowe moduły:</font></b></p><br>
 ------------------------------------------------------------------------------------
