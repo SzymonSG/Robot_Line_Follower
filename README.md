@@ -2,6 +2,9 @@
 # Zawartość
 
 1.  Uruchomienie programu Webots
+    - a. Wymagania techniczne
+    - b. Ścieżka pobierania
+    - c. Ścieżka instalacji
 1.  Uruchomienie programu Webots
 1.	Utworzenie projektu świata Webots
     - a.	Inicjacja świata
@@ -65,13 +68,16 @@ Po wyborze systemu , zostaję uruchomiony proces pobierania aplikacji na kompute
 ![alt text](images/pasek.png "Title")
 
 <font size="3"><b>c. Ścieżka instalacji </font></b> <br>
+Intalacja programu przebiega stanardowo wbieramy, lokalizacje zapisu i klikamy install.
+![alt text](images/install.png "Title")
+![alt text](images/next.png "Title")
 
 <font size="5 "> 2. Uruchomienie programu Weebots</font><br><br>
 W momencie kiedy nasz program będzie już zainstalowany na komputerze. Będziemy mieli możliwość uruchomienia go z listy dostępnych aplikacji w systemie
 
 ![alt text](images/menu.png "Title")
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>wyrównay porgubiony i powiekszony paragraf</font></b></p> 
+
 
 <font size="5"> 3. Utworzenie projektu świata Webots</font><br><br>
 <font size="3"><b>a. Inicjajca świata </font></b> <br>
@@ -665,15 +671,13 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 [cyberbotics webots dokumentacja](https://cyberbotics.com/doc/reference/ "cyberbotics page")
 
 ### Filmy obrazujące jazdę na 3 torach
-**Tor łatwy**
 
+[Tor łatwy](https://youtu.be/9pRB_EiRPUY "cyberbotics page")
 
-**Tor śrendio-zaawansowany**
+[Tor średnio-zaawansowany](https://youtu.be/EPfG9dZk4d4 "cyberbotics page")
 
-[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/EPfG9dZk4d4)
+[Tor zaawansownay](https://youtu.be/9pRB_EiRPUY "cyberbotics page")
 
-**Tor zaawansownay**
-[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/9pRB_EiRPUY)
 
 
 
