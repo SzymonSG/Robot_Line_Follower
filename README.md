@@ -672,7 +672,7 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 
 ### Filmy obrazujące jazdę na 3 torach
 
-[Tor łatwy](https://youtu.be/9pRB_EiRPUY "cyberbotics page")
+[Tor łatwy](https://youtu.be/6G2D55v6Ltw  "cyberbotics page")
 
 [Tor średnio-zaawansowany](https://youtu.be/EPfG9dZk4d4 "cyberbotics page")
 
