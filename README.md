@@ -206,7 +206,7 @@ int wb_camera_get_sampling_period(WbDeviceTag tag);
 <font size="3"><b>b.Utworzenie kontrolera – controller </font></b> <br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Proces utworzenia kontrolera</font></b></p>
 
->>Kontroler odpowiada za sterowanie naszym robotem. W nim implementujemy język naszego kodu , środowisko IDE oraz unikalną nazwę. Dzięki czemu mamy skonfigurowany prawidłowo plik pod implementację pod danego robota. 
+Kontroler odpowiada za sterowanie naszym robotem. W nim implementujemy język naszego kodu , środowisko IDE oraz unikalną nazwę. Dzięki czemu mamy skonfigurowany prawidłowo plik pod implementację pod danego robota. 
 W celu utworzenia kontrolora robota, należy z paska menu wybrać opcję:
 Wizards -> New Robot Controller…
 Po wyborze powyższej opcji , otrzymamy widok kreatora która przeprowadzi nas przez proces utworzenia nowego kontrolera.
