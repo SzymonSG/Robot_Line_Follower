@@ -71,12 +71,12 @@ W momencie kiedy nasz program będzie już zainstalowany na komputerze. Będziem
 
 ![alt text](images/menu.png "Title")
 
-<p style="text-indent: 30px;"><font size="3"><b>wyrównay porgubiony i powiekszony paragraf</font></b></p> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>wyrównay porgubiony i powiekszony paragraf</font></b></p> 
 
 <font size="5"> 3. Utworzenie projektu świata Webots</font><br><br>
 <font size="3"><b>a. Inicjajca świata </font></b> <br>
 
-<p style="text-indent: 35px;"><font size="3"><b> i.	Utworzenie projektu nowego świata </font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b> i.	Utworzenie projektu nowego świata </font></b></p>
 
       Nowy świat tworzymy przez procedurę wyboru:
 	  CTRL+SHIFT+N
@@ -87,14 +87,14 @@ Po wykonanu tej procedury otrzymamy widok:
 
 ![alt text](images/widok.png "Title")
 
-<p style="text-indent: 30px;"><font size="3"><b>ii.	Zapis projektu</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>ii.	Zapis projektu</font></b></p>
 Zapis projektu wykonujemy przez procedurę zapisu:
 CTRL+SHIFT+S
 Opcjonalnym sposobem na zapis świata w aplikacji jest również wybór standardowej metody ścieżki:
 <br> FILE -> Save project
 
 <font size="3"><b>b. Inicjajca świata </font></b> <br>
-<p style="text-indent: 30px;"><font size="3"><b>i.	Konfiguracja RectangleArea</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Konfiguracja RectangleArea</font></b></p>
 Plansza jest najważniejszym krokiem potrzebnym do wykonania po utworzeniu świata w programie. Aby tego dokonać będziemy musieli przejść procedurę implementacji dodatkowej zawartości z biblioteki szablonów którą udostępnia Webots. Jest to najprostsze, ale zarazem najlepsze rozwiązanie które oszczędza czas programiście.<br>
 W utworzonym projekcie świata , przechodzimy do etapu wyboru szablonu:<br>
 FILE -> Open Sample World<br> 
@@ -123,7 +123,7 @@ Na końcowym etapie RectangleArea , powinna posiadać wszystkie niżej wymienion
 
 
 <font size="3"><b>c. Inicjacja torów </font></b> <br>
-<p style="text-indent: 30px;"><font size="3"><b>i.	Utworzenie toru w programie Adobe Photoshop</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Utworzenie toru w programie Adobe Photoshop</font></b></p>
 Tor jazdy tworzymy w rozdzielczości nie mniejszej oraz nie większej niż:
 
 ![alt text](images/wym.png "Title")
@@ -141,7 +141,7 @@ Gotowy plik zapisujemy zawsze jako jeden z dostępnych formatów:<br>
 
 W innym wypadku program Webots nie poprawnie zaimplementuję dane w systemie przez co wykonany tor może odbiegać od utworzonego np. po przez przekształcone, zdeformowane krzywe lub ucięcie kluczowych elementów.
 
-<p style="text-indent: 30px;"><font size="3"><b>ii.	Import utworzonego toru do Webots</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>ii.	Import utworzonego toru do Webots</font></b></p>
 Utworzony tor importujemy do programu jako metoda :
 
 ```python
@@ -155,12 +155,12 @@ Warto również wykonać kopię toru, gdyż funkcja nie zapamięta go w systemie
 A następnie definiujemy lokalizację wcześniej przygotowanego toru. Ważne , aby tor znajdował się w tym samym folderze w celu uniknięcia nie przyjemnych komplikacji wynikających z przypadkowego zagubienia pliku.
 Warto również wykonać kopię toru, gdyż funkcja nie zapamięta go w systemie i bazuję na nim w całym okresie działania programu.
 
-<p style="text-indent: 30px;"><font size="3"><b>Załącznik 1:</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>Załącznik 1:</font></b></p>
 
 ![alt text](images/zal.png "Title")
 
 <font size="3"><b>d. Inicjacja Robota </font></b> <br>
-<p style="text-indent: 30px;"><font size="3"><b>i.	Wybór robota e-puck</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Wybór robota e-puck</font></b></p>
 
 Wybór robota jest kwestią sporną. W celu wykonania tego projektu został wybrany robot spełniający wszystkie kryteria umożliwiające wykonanie zadania poruszania się z dużą prędkościa w miejscach pozwalających na takie zachowanie.
 E-Puck – to miniaturowy robot mobilny opracowany pierwotnie w EPFL do celów dydaktycznych przez projektantów odnoszącego sukcesy robota Khepera. Sprzęt i oprogramowanie e-pucka jest w pełni open source, zapewniając niski poziom dostępu do każdego urządzenia elektronicznego i oferując nieograniczone możliwości rozszerzenia.Model obejmuje obsługę silników kół różnicowych (enkodery są również symulowane jako czujniki położenia), czujniki podczerwieni do pomiaru odległości i światła, akcelerometr, kamera, 8 otaczających diod LED, diody LED nadwozia i przedniej, komunikacja Bluetooth (modelowany przy użyciu urządzeń Emiter / Receiver) i rozszerzenie czujników uziemienia. Inne urządzenia e-puck nie są jeszcze symulowane w bieżącym modelu.
@@ -172,7 +172,7 @@ W celu ręcznej implementacji robota, jesteśmy w stanie tego dokonać dodając 
 <font size="5">4.	Zaprogramowanie robota</font><br><br>
 <font size="3"><b>a.	Wybór czujników </font></b> <br>
 Czujniki pełnią istotną rolę w funkcjonowaniu robotów. To dzięki nim jesteśmy w stanie skonfigurować robota pod takim zachowaniem jakie nas interesuję. Jesteśmy ograniczeni tylko do tych które są dostępne, dlatego też bardzo ważny jest wcześniejszy prawidłowy wybór robota, aby zapewnił nam odpowiednie zapotrzebowanie do naszych zadań.
-<p style="text-indent: 30px;"><font size="3"><b>i.	Dystansu</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Dystansu</font></b></p>
 Czujnik dystansu można użyć do modelowania czujnika ogólnego, czujnika podczerwieni, czujnika sonaru lub dalmierza laserowego. Ta symulacja urządzenia jest wykonywana przez wykrywanie kolizji między jednym lub kilkoma promieniami czujnika i obiektami w otoczeniu. W przypadku typu ogólnego, sonaru i lasera kolizja zachodzi z obiektami ograniczającymi węzłów Solid, natomiast wykrywanie kolizji promieni podczerwonych wykorzystuje same węzły Solid.<br>
 DistanceSensor można wyświetlić, sprawdzając menu Widok / Opcjonalne renderowanie / Pokaż promienie czujnika odległości. Przejście czerwono-zielone na promieniach wskazuje punkty przecięcia z ograniczającymi obiektami.
 Funkcje jakie zostały użyte do inicjacji tego czujnika to:
@@ -192,7 +192,7 @@ wb_distance_sensor_get_aperture – odległość zwracana w radianach
 ```
     ta funkcja pozwala użytkownikowi odczytać typ czujnika odległości zdefiniowany w polu typu.
 
-<p style="text-indent: 30px;"><font size="3"><b>ii.	Kamery</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>ii.	Kamery</font></b></p>
 Węzeł kamery służy do modelowania kamery pokładowej robota. Powstały obraz można wyświetlić w oknie 3D. W zależności od konfiguracji węzeł Camera może modelować kamerę liniową, typową kamerę RGB lub nawet rybie oko, które jest zniekształcone sferycznie.
 
 Implementacja kamery:
@@ -221,68 +221,58 @@ Klikamy przycisk „Next” , a następnie wybieramy język programowania w któ
 Klikając przycisk „Next” przechodzimy do etapu wyboru środowiska IDE w którym będziemy projektować kod, domyślnie wybrane IDE to „Webots”<br>
 
 
-![alt text](new.png "Title")<br>
+![alt text](images/new.png "Title")<br>
 
 Po nadaniu nazwy , etap tworzenia kontrolera zostaje zakończony. Mamy możliwość zakończenia kreatora z opcją automatycznego otwarcia naszego nowo przygotowanego kontrolera w edytorze tekstu.
 
-![alt text](controller.png "Title")<br><br>
+![alt text](images/controller.png "Title")<br><br>
 
 <p style="text-allign: center;"><font size="4"><b>Standardowy kod jaki zostaje utworzony, to prosty wycinek który implementuję robota oraz jego podstawowe moduły:</font></b></p><br>
 ------------------------------------------------------------------------------------
-'ikkolklkl
-/*
- * File:          my_controller.c
- * Date:
- * Description:
- * Author:
- * Modifications:
- */
-/*
- * You may need to add include files like <webots/distance_sensor.h> or
- * <webots/motor.h>, etc.
- */
-#include <webots/robot.h>
-/*
- * You may want to add macros here.
- */
-#define TIME_STEP 64
-/*
- * This is the main program.
- * The arguments of the main function can be specified by the
- * "controllerArgs" field of the Robot node
- */
-int main(int argc, char **argv) {
-  /* necessary to initialize webots stuff */
-  wb_robot_init();
-  /*
-   * You should declare here WbDeviceTag variables for storing
-   * robot devices like this:
-   *  WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
-   *  WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
-   */
-  /* main loop
-   * Perform simulation steps of TIME_STEP milliseconds
-   * and leave the loop when the simulation is over
-   */
-  while (wb_robot_step(TIME_STEP) != -1) {
-    /*
-     * Read the sensors :
-     * Enter here functions to read sensor data, like:
-     *  double val = wb_distance_sensor_get_value(my_sensor);
-     */
 
-    /* Process sensor data here */
-    /*
-     * Enter here functions to send actuator commands, like:
-     * wb_motor_set_position(my_actuator, 10.0);
-     */
+/
+  
+**Może być konieczne dodanie takich bibliotek**
+````C++
+<webots/distance_sensor.h> or
+<webots/motor.h>
+````
+
+````C++
+#include <webots/robot.h>
+#define TIME_STEP 64
+
+````
+
+**To jest główny program , agrumenty głównej funckcji są określone przez "controlerArgs" odnoszące się do węzła robota**
+````C++
+int main(int argc, char **argv) {
+  //inicializacjq webotsów, niezbędne
+  wb_robot_init();
+````
+
+**Należy tutaj zadeklarować zmienne WbDeviceTag do przechowywania tego typu urządzeń**
+
+````C++
+WbDeviceTag my_sensor = wb_robot_get_device("my_sensor");
+WbDeviceTag my_actuator = wb_robot_get_device("my_actuator");
+````
+
+  **Główna pętla wykonuje kroki symulacji w milisekunadach i opuszcza pętle po zakończeniu**
+  `````C++
+  while (wb_robot_step(TIME_STEP) != -1) {
+    //Zczytywanie sensorów
+    // Wczytanie do funkcji danych z sensorów 
+     double val = wb_distance_sensor_get_value(my_sensor);
+     //wywołanie funkci wysłającej informacji do robota ustawiające jego pozycje
+     wb_motor_set_position(my_actuator, 10.0);
+    
   };
-  /* Enter your cleanup code here */
-  /* This is necessary to cleanup webots resources */
+   // Czyszczenie zasobów webots
   wb_robot_cleanup();
   return 0;
-}
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+  `````
+
 ---------------------------------------
 <p style="text-indent: 30px;"><font size="3"><b>ii.	Implementacja kodu</font></b></p>
 Domyślnie zostaję zaimplementowany standardowy kod oraz moduł wybranego robota. Od tego momentu mamy możliwość modyfikacji kodu dodając własne funkcję, metody oraz zmienne. Istnieję również możliwość wyczyszczenia naszego pliku kontrolera i zaimplementowanie wszystkich funkcji , zmiennych oraz metod ręcznie wg. naszych preferencji w pustym pliku.Musimy natomiast pamietać, aby programując robota używac już zdefiniowanych zmiennych modułów w dokumentacji Webots.
@@ -290,7 +280,7 @@ Domyślnie zostaję zaimplementowany standardowy kod oraz moduł wybranego robot
 
 <font size="3"><b>c. Implementacja modułów</font></b> <br>
 
-<p style="text-indent: 30px;"><font size="3"><b>i.	Standardowa biblioteka C++</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Standardowa biblioteka C++</font></b></p>
 
 Moduł implementowany jest standardowo , przy jego braku należy go zaimplementować:
 ````C++
@@ -299,7 +289,7 @@ Moduł implementowany jest standardowo , przy jego braku należy go zaimplemento
 Oczywiście plik o nazwie „stdio.h” musi zawierać prawidłowe instrukcje źródłowe w języku C, które można skompilować jako część programu.Ten konkretny plik składa się z kilku standardowych # definicji w celu zdefiniowania niektórych standardowych operacji we / wy.
 Plik nazywa się plikiem nagłówkowym, a na dyskach źródłowych dostarczonych z kompilatorem C znajdziemy kilka różnych plików nagłówkowych.
 
-<p style="text-indent: 30px;"><font size="3"><b>ii.	Dystansu</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>ii.	Dystansu</font></b></p>
 DistanceSensor można użyć do modelowania czujnika ogólnego, czujnika podczerwieni, czujnika sonaru lub dalmierza laserowego. Ta symulacja urządzenia jest wykonywana przez wykrywanie kolizji między jednym lub kilkoma promieniami czujnika i obiektami w otoczeniu. W przypadku typu ogólnego, sonaru i lasera kolizja zachodzi z obiektami ograniczającymi węzłów Solid, natomiast wykrywanie kolizji promieni podczerwonych wykorzystuje węzły Solid.<br>
 Promienie węzłów DistanceSensor można wyświetlić, sprawdzając menu Widok / Opcjonalne renderowanie / Pokaż promienie czujnika odległości. Przejście czerwono-zielone na promieniach wskazuje punkty przecięcia z ograniczającymi obiektami.
 
@@ -308,7 +298,7 @@ Promienie węzłów DistanceSensor można wyświetlić, sprawdzając menu Widok 
 Implementacja modułu odbywa się przez import:
 #include <webots/distance_sensor.h>
 ````
-<p style="text-indent: 30px;"><font size="3"><b>iii.	Led</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>iii.	Led</font></b></p>
 Moduł LED służy do modelowania diody elektroluminescencyjnej (LED). Światło wytwarzane przez diodę LED można wykorzystać do debugowania lub do celów informacyjnych. Kolor wynikowy jest stosowany tylko w pierwszym potomku węzła LED. Jeśli pierwsze dziecko jest węzłem Shape, pole emissiveColor swojego węzła Material lub PBRAppearance jest zmieniane. Jeśli pierwsze dziecko jest węzłem Światła, jego pole koloru zostanie zmienione. W przeciwnym razie, jeśli pierwsze dziecko jest węzłem Grupy, w tym węźle stosowane jest wyszukiwanie rekurencyjne w celu znalezienia pola koloru, które należy zmodyfikować, więc każdy węzeł Światła, Kształtu i Grupy jest zmieniany zgodnie z poprzednimi regułami. Jeśli chodzi o węzły Light, węzły LED akceptują tylko węzły PointLight i SpotLight jako dzieci. Należy pamiętać, że węzły Materiał i Światło, które zostaną automatycznie zmienione przez funkcję LED, nie mogą być węzłami UŻYJ.
 
 
@@ -316,7 +306,7 @@ Moduł LED służy do modelowania diody elektroluminescencyjnej (LED). Światło
 Implementacja modułu odbywa się przez import:
 #include <webots/led.h>
 ````
-<p style="text-indent: 30px;"><font size="3"><b>iv.	Akcelerometr</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>iv.	Akcelerometr</font></b></p>
 
 Akcelerometr może być używany do modelowania urządzeń akcelerometru, takich jak te powszechnie spotykane w mobilnej elektronice, robotach i urządzeniach wejściowych do gier. Węzeł akcelerometru mierzy siły reakcji przyśpieszone i grawitacyjne w 1, 2 lub 3 osiach. Może być używany na przykład do wykrywania upadku, kierunku góra / dół itp.
 
@@ -324,7 +314,7 @@ Akcelerometr może być używany do modelowania urządzeń akcelerometru, takich
 Implementacja modułu odbywa się przez import:
 #include <webots/accelerometer.h>
 ````
-<p style="text-indent: 30px;"><font size="3"><b>v.Kamera</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>v.Kamera</font></b></p>
 Moduł kamery służy do modelowania kamery pokładowej robota. Powstały obraz można wyświetlić w oknie 3D. W zależności od konfiguracji węzeł Camera może modelować kamerę liniową, typową kamerę RGB lub nawet rybie oko, które jest zniekształcone sferycznie.
 
 ````C++
@@ -332,7 +322,7 @@ Implementacja modułu odbywa się przez import:
 #include <webots/camera.h>
 ````
 
-<p style="text-indent: 30px;"><font size="3"><b>vi. Światła</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>vi. Światła</font></b></p>
 Moduł LightSensor służą do modelowania foto-tranzystorów, foto-diod lub innego rodzaju urządzeń, które mierzą natężenie światła w danym kierunku. Napromieniowanie reprezentuje padanie mocy <br>
 promieniowania na powierzchnię w watach na metr kwadratowy [W / m²] i jest czasami nazywane intensywnością. Symulowane natężenie napromienienia jest obliczane przez dodanie natężenia napromieniowania wniesionego przez każde źródło światła (DirectionalLight, SpotLight i PointLight) na świecie. Następnie całkowite natężenie napromienienia jest mnożone przez filtr kolorów i wprowadzane do tabeli odnośników, która zwraca odpowiednią wartość zdefiniowaną przez użytkownika.Udział napromieniowania każdego źródła światła jest podzielony na bezpośredni i otoczenia. Bezpośredni wkład zależy od położenia i orientacji czujnika, położenia i kierunku źródeł światła oraz (opcjonalnie) od możliwej niedrożności źródeł światła. Wkład otoczenia ignoruje możliwe niedrożności i nie ma na nie wpływu orientacja czujnika ani kierunek źródła światła. Bezpośrednie i otoczenia wkłady lamp punktowych i punktowych są tłumione zgodnie z odległością między czujnikiem a światłem, zgodnie z określonymi współczynnikami tłumienia. Światło emitowane przez światło kierunkowe nie jest tłumione. Zobacz także opisy węzłów DirectionalLight, SpotLight i PointLight.
 Należy pamiętać, że model oświetlenia Webots nie uwzględnia światła odbitego ani kolorów obiektów.
@@ -344,7 +334,7 @@ Implementacja modułu odbywa się przez import:
 ````
 
 
-<p style="text-indent: 30px;"><font size="3"><b>vii. Robota</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>vii. Robota</font></b></p>
 
 Najważniejszy moduł , bez którego nie zbudowalibyśmy naszego zadania. Dotyczy on bowiem konfiguracji i możliwości obsługi robota w środowisku Webots. 
 
@@ -354,7 +344,7 @@ Najważniejszy moduł , bez którego nie zbudowalibyśmy naszego zadania. Dotycz
 Implementacja modułu odbywa się przez import:
 #include <webots/robot.h>
 ````
-<p style="text-indent: 30px;"><font size="3"><b>viii. Węzeł Silnikowy</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>viii. Węzeł Silnikowy</font></b></p>
 Istotny moduł , pozwalający na poruszanie się robota. Moduł ten jest modułem abstrakcyjnym (bez tworzenia instancji), którego klasami pochodnymi są RotationalMotor i LinearMotor. Klasy te można wykorzystać w symulacji mechanicznej do zasilania złącza, a tym samym wykonywania ruchu wzdłuż lub wokół jednej z jego osi. RotationalMotor może zasilać HingeJoint (odpowiednio Hinge2Joint), gdy jest ustawiony w polu urządzenia (odpowiednio urządzenia lub urządzenia 2) tych węzłów. Powoduje to ruch obrotowy wokół wybranej osi. Podobnie, silnik liniowy może zasilać SliderJoint, wytwarzając ruch przesuwny wzdłuż swojej osi
 
 ````C++
@@ -365,7 +355,7 @@ Implementacja modułu odbywa się przez import:
 
 --------------------
 <font size="3"><b>Implementacja zmiennych funkcji </font></b> <br>
-<p style="text-indent: 30px;"><font size="3"><b>i. Poruszanie się robota w zależności od koloru linii/font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i. Poruszanie się robota w zależności od koloru linii/font></b></p>
 
 **Zaprogramowanie robota pod kątem weryfikacji kolorów zaczynamy od deklaracji definicji kolorów:**
 
@@ -547,7 +537,7 @@ lem_speed[RIGHT] = LEM_FORWARD_SPEED;
 
 --------------------------------------
 
-<p style="text-indent: 30px;"><font size="3"><b>ii. Porsuzanie  robota wspieracjanego przez kamerę</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>ii. Porsuzanie  robota wspieracjanego przez kamerę</font></b></p>
 Kamera jest kluczowym dodatkiem który został dodany do robota typu epuck. Dzięki niej jesteśmy w stanie weryfikować świat znajdujący się przed robotem.
 Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na sekundę. Bez koloru możemy zwiększyć do 8 klatek na sekundę. Nie więcej. Ale możesz także uzyskać inny rodzaj obrazu, na przykład linię pikseli kolorowych 480 x 1 na ziemi skierowaną w stronę robota.
 
@@ -666,16 +656,26 @@ void lfm(int array[], int size){
 ````
 ---------------
 <font size="5"> 5.Dokumentacja</font><br><br>
-<p style="text-indent: 30px;"><font size="3"><b>a.	Robot e-puck</font></b></p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>a.	Robot e-puck</font></b></p>
 Pełną dokumentację robota można znaleźć na stronie producenta maszyny.
 
 [cyberbotics e-puck dokumentacja](https://cyberbotics.com/doc/guide/epuck "cyberbotics page")
-<p style="text-indent: 30px;"><font size="3"><b>b. Webots</font></b></p>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>b. Webots</font></b></p>
 Pełną dokumentację można znaleźć na stronie producenta oprogramowania i środowiska Webots. 
 
 [cyberbotics webots dokumentacja](https://cyberbotics.com/doc/reference/ "cyberbotics page")
 
+### Filmy obrazujące jazdę na 3 torach
+**Tor łatwy**
+[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/6G2D55v6Ltw )
 
+**Tor śrendio-zaawansowany**
+
+[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/EPfG9dZk4d4)
+
+**Tor zaawansownay**
+[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/9pRB_EiRPUY)
 
 
 
