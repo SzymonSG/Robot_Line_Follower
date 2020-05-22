@@ -667,7 +667,6 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 ### Filmy obrazujące jazdę na 3 torach
 **Tor łatwy**
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6G2D55v6Ltw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 **Tor śrendio-zaawansowany**
 
