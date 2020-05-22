@@ -204,8 +204,9 @@ int wb_camera_get_sampling_period(WbDeviceTag tag);
 ```
 
 <font size="3"><b>b.Utworzenie kontrolera – controller </font></b> <br>
-<p style="text-indent: 30px;"><font size="3"><b>i.	Proces utworzenia kontrolera</font></b></p>
-Kontroler odpowiada za sterowanie naszym robotem. W nim implementujemy język naszego kodu , środowisko IDE oraz unikalną nazwę. Dzięki czemu mamy skonfigurowany prawidłowo plik pod implementację pod danego robota. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i.	Proces utworzenia kontrolera</font></b></p>
+
+>>Kontroler odpowiada za sterowanie naszym robotem. W nim implementujemy język naszego kodu , środowisko IDE oraz unikalną nazwę. Dzięki czemu mamy skonfigurowany prawidłowo plik pod implementację pod danego robota. 
 W celu utworzenia kontrolora robota, należy z paska menu wybrać opcję:
 Wizards -> New Robot Controller…
 Po wyborze powyższej opcji , otrzymamy widok kreatora która przeprowadzi nas przez proces utworzenia nowego kontrolera.
@@ -220,11 +221,11 @@ Klikamy przycisk „Next” , a następnie wybieramy język programowania w któ
 Klikając przycisk „Next” przechodzimy do etapu wyboru środowiska IDE w którym będziemy projektować kod, domyślnie wybrane IDE to „Webots”<br>
 
 
-![alt text](images/new.png "Title")<br>
+![alt text](new.png "Title")<br>
 
 Po nadaniu nazwy , etap tworzenia kontrolera zostaje zakończony. Mamy możliwość zakończenia kreatora z opcją automatycznego otwarcia naszego nowo przygotowanego kontrolera w edytorze tekstu.
 
-![alt text](images/controller.png "Title")<br><br>
+![alt text](controller.png "Title")<br><br>
 
 <p style="text-allign: center;"><font size="4"><b>Standardowy kod jaki zostaje utworzony, to prosty wycinek który implementuję robota oraz jego podstawowe moduły:</font></b></p><br>
 ------------------------------------------------------------------------------------
