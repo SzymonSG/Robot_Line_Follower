@@ -230,8 +230,6 @@ Po nadaniu nazwy , etap tworzenia kontrolera zostaje zakończony. Mamy możliwo�
 <p style="text-allign: center;"><font size="4"><b>Standardowy kod jaki zostaje utworzony, to prosty wycinek który implementuję robota oraz jego podstawowe moduły:</font></b></p><br>
 ------------------------------------------------------------------------------------
 
-/
-  
 **Może być konieczne dodanie takich bibliotek**
 ````C++
 <webots/distance_sensor.h> or
@@ -668,7 +666,8 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 
 ### Filmy obrazujące jazdę na 3 torach
 **Tor łatwy**
-[![IMAGE ALT TEXT HERE](images/FILM1.png "Title")](https://youtu.be/6G2D55v6Ltw )
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6G2D55v6Ltw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 **Tor śrendio-zaawansowany**
 
