@@ -590,8 +590,6 @@ Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na se
   free(grey);
   return TIME_STEP;
 ````
-**Moduły wykorzystane do interpretacji : LEM ,LFM , LLM**
-**Przykład zdefiniowania modułu LEM:**
 ````C++
   void lem(int array[], int size){
   int *left   = (int *)malloc(sizeof(int)*size/10);
