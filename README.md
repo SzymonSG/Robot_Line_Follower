@@ -69,7 +69,9 @@ Po wyborze systemu , zostaję uruchomiony proces pobierania aplikacji na kompute
 
 <font size="3"><b>c. Ścieżka instalacji </font></b> <br>
 Intalacja programu przebiega stanardowo wbieramy, lokalizacje zapisu i klikamy install.
+
 ![alt text](images/install.png "Title")
+
 ![alt text](images/next.png "Title")
 
 <font size="5 "> 2. Uruchomienie programu Weebots</font><br><br>
@@ -629,35 +631,6 @@ Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na se
   free(middle);
 }
 ````
-**Przykład zdefiniowania modułu LFM:**
-````C++
-void lfm(int array[], int size){
-  if (lfm_active){
-    int delta = find_middle(array,size)-width/2;
-    lfm_speed[LEFT]=MAX_DELTA*delta/size;
-    lfm_speed[RIGHT]=-lfm_speed[LEFT];
-	////give adjustments to default speed, speed[LEFT] and  speed[right]
-  } else {
-    lfm_speed[RIGHT]=lfm_speed[LEFT]=0;
-  }
-}
-````
-**Przykład zdefiniowania modułu LLM**
-
-````C++
-    void llm(int array[], int size){
-  int i;
-  for (i=0;i<3;i++){
-    if (current_mean[i]<previous_mean[i]-SENSIBILITY){
-      is_in[i]=0;
-    }
-    previous_mean[i]=current_mean[i];
-  }
-  if (!is_in[0]&&!is_in[1]&&!is_in[2]){
-    lfm_active=0;
-    //…  }
-}
-````
 ---------------
 <font size="5"> 5.Dokumentacja</font><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>a.	Robot e-puck</font></b></p>
@@ -672,15 +645,19 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 
 ### Filmy obrazujące jazdę na 3 torach
 
-[Tor łatwy](https://youtu.be/6G2D55v6Ltw  "cyberbotics page")
+[Tor łatwy](https://youtu.be/D7ZSiPmXsxM  "cyberbotics page")
 
-[Tor średnio-zaawansowany](https://youtu.be/EPfG9dZk4d4 "cyberbotics page")
+[Tor średnio-zaawansowany](https://youtu.be/UGXmiI5HuYg "cyberbotics page")
 
-[Tor zaawansownay](https://youtu.be/9pRB_EiRPUY "cyberbotics page")
-
-
+[Tor zaawansownay](https://youtu.be/x463kdaAKDM "cyberbotics page")
 
 
+### Filmy obrazujące porówananie robota podstawowego z robotem adaptacyjnym
+[Tor łatwy porównanie](https://youtu.be/Oq6xGhTVsn0  "cyberbotics page")
+
+[Tor średnio-zaawansowany porównanie](https://youtu.be/9rVVcCIK46E "cyberbotics page")
+
+[Tor zaawansownay porównanie](https://youtu.be/g1CnNbt4iI0 "cyberbotics page")
 
 
 
