@@ -629,9 +629,6 @@ Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na se
 }
 ````
 ---------------
-<p style="font-family: times, serif; font-size:17pt; font-style:arial">
-    Why did we use these specific parameters during the calculation of the fingerprints?
-</p>
 <font size="5"> 5.Dokumentacja</font><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>a.	Robot e-puck</font></b></p>
 Pełną dokumentację robota można znaleźć na stronie producenta maszyny.
