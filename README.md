@@ -640,6 +640,9 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 
 [cyberbotics webots dokumentacja](https://cyberbotics.com/doc/reference/ "cyberbotics page")
 
+### Webots IDE film.
+[Webots](https://youtu.be/loXmxXOLt8E "cyberbotics page")
+
 ### Filmy obrazujące jazdę na 3 torach
 
 [Tor łatwy](https://youtu.be/D7ZSiPmXsxM  "cyberbotics page")
@@ -655,6 +658,7 @@ Pełną dokumentację można znaleźć na stronie producenta oprogramowania i ś
 [Tor średnio-zaawansowany porównanie](https://youtu.be/9rVVcCIK46E "cyberbotics page")
 
 [Tor zaawansownay porównanie](https://youtu.be/g1CnNbt4iI0 "cyberbotics page")
+
 
 
 
