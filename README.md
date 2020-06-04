@@ -70,9 +70,8 @@ Po wyborze systemu , zostaję uruchomiony proces pobierania aplikacji na kompute
 <font size="3"><b>c. Ścieżka instalacji </font></b> <br>
 Intalacja programu przebiega stanardowo wbieramy, lokalizacje zapisu i klikamy install.
 
-![alt text](images/install.png "Title")
-
-![alt text](images/next.png "Title")
+![alt text](images/nxt.png "Title")
+![alt text](images/inst.png "Title")
 
 <font size="5 "> 2. Uruchomienie programu Weebots</font><br><br>
 W momencie kiedy nasz program będzie już zainstalowany na komputerze. Będziemy mieli możliwość uruchomienia go z listy dostępnych aplikacji w systemie
@@ -630,7 +629,7 @@ Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na se
 }
 ````
 ---------------
-<font size="5"> 5.Dokumentacja</font><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"> 5.Dokumentacja</font><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>a.	Robot e-puck</font></b></p>
 Pełną dokumentację robota można znaleźć na stronie producenta maszyny.
 
