@@ -81,7 +81,7 @@ W momencie kiedy nasz program będzie już zainstalowany na komputerze. Będziem
 
 
 <font size="5"> 3. Utworzenie projektu świata Webots</font><br><br>
-<font size="3"><b>a. Inicjajca świata </font></b> <br>
+<font size="3"><b>a. Inicjajca świata </font></b><br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b> i.	Utworzenie projektu nowego świata </font></b></p>
 
@@ -359,8 +359,8 @@ Implementacja modułu odbywa się przez import:
 
 
 --------------------
-<font size="3"><b>Implementacja zmiennych funkcji </font></b> <br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i. Poruszanie się robota w zależności od koloru linii/font></b></p>
+<font size="3"><b>Implementacja zmiennych funkcji </font></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>i. Poruszanie się robota w zależności od koloru linii</font></b></p>
 
 **Zaprogramowanie robota pod kątem weryfikacji kolorów zaczynamy od deklaracji definicji kolorów:**
 
@@ -629,7 +629,8 @@ Obraz jaki uzyskujemy domyślnie to 52 × 39 RGB  z prędkością 4 klatek na se
 }
 ````
 ---------------
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="5"> 5.Dokumentacja</font><br><br>
+<font size="6"> This is my text number 6</font><br>
+<font size="5"> 5.Dokumentacja</font><br><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="3"><b>a.	Robot e-puck</font></b></p>
 Pełną dokumentację robota można znaleźć na stronie producenta maszyny.
 
